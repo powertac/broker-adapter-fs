@@ -8,7 +8,7 @@ runBroker <- function(input, output) {
     #print("child process")
     childOut <- fifo(input, open="w", blocking=TRUE)
     childIn <- fifo(output, open="r", blocking=TRUE)
-    args <- c("exec:exec", " -Dexec.args='", "--ipc-adapter-name CharStreamAdapter --prop samplebroker.r.charStreamAdapter.inputFilename ", output,  " --prop samplebroker.r.charStreamAdapter.outputFilename ", input, "'")
+    args <- c("exec:exec", " -Dexec.args='", "--ipc-adapter --prop samplebroker.r.charStreamAdapter.inputFilename ", output,  " --prop samplebroker.r.charStreamAdapter.outputFilename ", input, "'")
     #print(paste(args))
     #writeLines(args, childOut)
     #writeLines(paste(args, collapse=""), childOut)
@@ -64,6 +64,6 @@ readBroker <- function(input, output) {
 
 # useful cmds
 start <- function() {
-  setwd("development/powertac/broker-adapter")
+  setwd("development/powertac/broker-adapter-fs")
   runBroker("broker-output", "broker-input")
 }
